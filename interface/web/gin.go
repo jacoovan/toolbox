@@ -9,6 +9,6 @@ import (
 type Gin interface {
 	Run(ctx context.Context) error
 
-	Index(ctx *gin.Context)
-	List(ctx *gin.Context)
+	Pilot(ctx *gin.Context)
+	Toolbox(ctx *gin.Context)
 }

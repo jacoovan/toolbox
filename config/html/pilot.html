@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>工具箱列表</title>
+</head>
+    <body>
+        <div>
+            {{ range $i, $v := . }}
+            <div style="width: 25%;border: 1px solid;border-radius: 5px;display: inline-block;">
+                <table style="width: 100%;text-align: center;">
+                    <tr>
+                        <td>模块:</td>
+                        <td>{{ $v.File }}</td>
+                    </tr>
+                    <tr>
+                        <td>链接:</td>
+                        <td><a href="{{ $v.Path }}/{{ $v.File }}" target="_blank">{{ $v.File }}</td>
+                    </tr>
+                </table>
+            </div>
+            {{ end }}
+        </div>
+    </body>
+</html>

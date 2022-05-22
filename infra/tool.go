@@ -3,7 +3,6 @@ package infra
 import (
 	"fmt"
 
-	"github.com/jacoovan/toolbox/internal/app"
 	"github.com/jacoovan/toolbox/pkg/config"
 )
 
@@ -12,7 +11,7 @@ const (
 )
 
 type toolbox interface {
-	initTool(cfg *config.ConfigParser) []app.Category
+	initTool(cfg *config.ConfigParser) ToolboxConfig
 }
 
 func newToolbox() toolbox {
@@ -22,10 +21,15 @@ func newToolbox() toolbox {
 
 type toolboxImp struct{}
 
-func (c *toolboxImp) initTool(cfg *config.ConfigParser) []app.Category {
-	list := make([]app.Category, 0)
-	if err := cfg.UnmarshalKey(toolboxCfgKey, &list); err != nil {
+func (c *toolboxImp) initTool(cfg *config.ConfigParser) ToolboxConfig {
+	toolboxCfg := ToolboxConfig{}
+	if err := cfg.UnmarshalKey(toolboxCfgKey, &toolboxCfg); err != nil {
 		panic(fmt.Sprintf("init gorm(err):%v", err))
 	}
-	return list
+	return toolboxCfg
+}
+
+type ToolboxConfig struct {
+	Dir string `mapstructure:"dir"`
+	Key string `mapstructure:"key"`
 }

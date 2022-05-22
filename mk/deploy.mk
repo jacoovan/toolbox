@@ -9,9 +9,7 @@ deploy-init:
 	echo IMAGE_NAME=$(IMAGE_NAME) >> $(ENV_FILE)
 	echo IMAGE_TAG=$(IMAGE_TAG) >> $(ENV_FILE)
 	echo SERVICE_NAME=$(SERVICE_NAME) >> $(ENV_FILE)
-	echo HOST=$(HOST) >> $(ENV_FILE)
 	echo PORT_WEB=$(PORT_WEB) >> $(ENV_FILE)
-	echo PORT_WS=$(PORT_WS) >> $(ENV_FILE)
 
 pull:
 	$(info ==================================================)

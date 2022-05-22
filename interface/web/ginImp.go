@@ -5,7 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jacoovan/toolbox/infra"
+	"github.com/jacoovan/toolbox/internal/app"
+	"github.com/jacoovan/toolbox/internal/app/tool"
 )
 
 type ginImp struct {
@@ -35,22 +36,48 @@ func (c *ginImp) Run(ctx context.Context) error {
 
 func (c *ginImp) initRouter() Gin {
 	engine := c.engine
-	engine.Handle(http.MethodGet, `/index`, c.Index)
-	engine.Handle(http.MethodGet, `/list`, c.List)
+	engine.Handle(http.MethodGet, `/`, c.Pilot)
+	engine.Handle(http.MethodGet, `/toolbox/:toolbox`, c.Toolbox)
 	engine.LoadHTMLGlob("config/html/*")
 	return c
 }
 
-func (c *ginImp) List(ctx *gin.Context) {
-	list := infra.GetTools()
-	data := map[string]interface{}{
-		"total": len(list),
-		"list":  list,
-	}
-	ctx.JSON(http.StatusOK, newCommonResp(http.StatusOK, true, "ok", data))
+type Pilot struct {
+	Path string
+	File string
 }
 
-func (c *ginImp) Index(ctx *gin.Context) {
-	tools := infra.GetTools()
-	ctx.HTML(http.StatusOK, "index.html", tools)
+func (c *ginImp) Pilot(ctx *gin.Context) {
+	files, err := app.Mgr().ToolboxApp().List()
+	if err != nil {
+		files = []string{}
+	}
+	data := make([]Pilot, len(files))
+	for i, v := range files {
+		data[i] = Pilot{
+			Path: `/toolbox`,
+			File: v,
+		}
+	}
+	ctx.HTML(http.StatusOK, "pilot.html", data)
+}
+
+type Toolbox struct {
+	Name string
+	Data []tool.Category
+}
+
+func (c *ginImp) Toolbox(ctx *gin.Context) {
+	var tools = make([]tool.Category, 0)
+	var err error
+	var data = Toolbox{}
+	if toolbox := ctx.Param("toolbox"); toolbox != "" {
+		data.Name = toolbox
+		tools, err = app.Mgr().ToolboxApp().Read(toolbox)
+		if err != nil {
+			tools = []tool.Category{}
+		}
+		data.Data = tools
+	}
+	ctx.HTML(http.StatusOK, "toolbox.html", data)
 }

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jacoovan/toolbox/internal/app"
 	"github.com/jacoovan/toolbox/pkg/config"
 )
 
@@ -26,7 +25,7 @@ var (
 )
 
 var (
-	tools []app.Category
+	toolboxCfg ToolboxConfig
 )
 
 func init() {
@@ -34,9 +33,8 @@ func init() {
 	if err := cfg.Parse(); err != nil {
 		panic(fmt.Sprintf("infra.ParseCfg(err):%v", err))
 	}
-	fmt.Println("cfg.Keys():", cfg.Keys())
 
-	tools = newToolbox().initTool(cfg)
+	toolboxCfg = newToolbox().initTool(cfg)
 }
 
 func GetServiceName() string {
@@ -47,6 +45,6 @@ func GetConfig() *config.ConfigParser {
 	return cfg
 }
 
-func GetTools() []app.Category {
-	return tools
+func GetToolboxConfig() ToolboxConfig {
+	return toolboxCfg
 }

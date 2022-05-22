@@ -2,16 +2,16 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>工具箱列表</title>
+    <title>工具箱-{{.Name}}</title>
 </head>
     <body>
         <div>
-            {{ range . }}
+            {{ range .Data }}
             <div>
                 <span style="font-size: large;font-weight: bold;">{{ .Name }}</span>
                 <div>
                     {{ range $i, $v := .Tools }}
-                    <div style="width: 25%;border: 1px solid;border-radius: 5px;display: inline-block;">
+                    <div style="width: 20%;border: 1px solid;border-radius: 5px;display: inline-block;">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>名称:</td>
@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <td>地址:</td>
-                                <td><a href="{{ $v.URL }}" target="_blank">{{ $v.URL }}</a></td>
+                                <td><a href="{{ $v.URL }}" target="_blank">链接</a></td>
                             </tr>
                         </table>
                     </div>

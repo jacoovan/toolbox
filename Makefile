@@ -1,7 +1,6 @@
 include mk/header.mk
 
 # deploy info
-HOST := 127.0.0.1
 PORT_WEB := 80
 
 # project
