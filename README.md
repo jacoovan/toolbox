@@ -1,21 +1,26 @@
 # toolbox
 
-- config: config/config.yaml
+- config: config/toolbox/default.yaml
 ```
-- name: 审计类example
+toolbox:
+- name: 日常
   tools:
-  - name: example1
-    description: 描述1
-    url: http://127.0.0.1:8080
-  - name: example2
-    description: 描述2
-    url: http://127.0.0.1:8080
-- name: 日志类
+  - name: 知乎
+    description: 资料信息
+    url: https://www.zhihu.com/
+  - name: github/jacoovan
+    description: 我的
+    url: https://github.com/jacoovan
+- name: 搜索
   tools:
-  - name: example3
-    description: 描述3
-    url: http://127.0.0.1:1234
+  - name: google
+    description: 搜索引擎
+    url: https://www.google.com/
 ```
+
+## Index
+
+![image](https://raw.githubusercontent.com/jacoovan/toolbox/main/img/demo-index.png)
 
 ## List
 

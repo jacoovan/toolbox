@@ -7,14 +7,10 @@
     <body>
         <div>
             {{ range $i, $v := . }}
-            <div style="width: 25%;border: 1px solid;border-radius: 5px;display: inline-block;">
+            <div style="width: 25%; height: 100px; border: 1px solid;border-radius: 5px;display: inline-block;">
                 <table style="width: 100%;text-align: center;">
-                    <tr>
+                    <tr style="height: 80px;">
                         <td>模块:</td>
-                        <td>{{ $v.File }}</td>
-                    </tr>
-                    <tr>
-                        <td>链接:</td>
                         <td><a href="{{ $v.Path }}/{{ $v.File }}" target="_blank">{{ $v.File }}</td>
                     </tr>
                 </table>
