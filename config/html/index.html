@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>工具箱列表</title>
+</head>
+    <body>
+        <div>
+            {{ range . }}
+            <div>
+                <span style="font-size: large;font-weight: bold;">{{ .Name }}</span>
+                <div>
+                    {{ range $i, $v := .Tools }}
+                    <div style="width: 25%;border: 1px solid;border-radius: 5px;display: inline-block;">
+                        <table style="width: 100%;text-align: center;">
+                            <tr>
+                                <td>名称:</td>
+                                <td>{{ $v.Name }}</td>
+                            </tr>
+                            <tr>
+                                <td>描述</td>
+                                <td>{{ $v.Description }}</td>
+                            </tr>
+                            <tr>
+                                <td>地址:</td>
+                                <td><a href="{{ $v.URL }}" target="_blank">{{ $v.URL }}</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </body>
+</html>
